@@ -1,8 +1,8 @@
 const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 
-// Node IDs for backend folder routing
-const POSTS_NODE = 10;
-const UPLOAD_NODE = 11;
+// // Node IDs for backend folder routing
+// const POSTS_NODE = 10;
+// const UPLOAD_NODE = 11;
 
 /// Core fetch wrapper — cookie session auth via credentials: 'include'
 async function request(path, options = {}) {
@@ -64,7 +64,7 @@ export const api = {
   createPost({ title, content }) {
     return mutation('/posts', {
       method: 'POST',
-      body: JSON.stringify({ title, content, nodeId: POSTS_NODE }),
+      body: JSON.stringify({ title, content}),
     });
   },
   updatePost(id, { title, content }) {
@@ -83,7 +83,7 @@ export const api = {
   uploadImage(file) {
     const form = new FormData();
     form.append('file', file);
-    form.append('nodeId', String(UPLOAD_NODE));
+    // form.append('nodeId', String(UPLOAD_NODE));
     return request('/upload', {
       method: 'POST',
       body: form,
